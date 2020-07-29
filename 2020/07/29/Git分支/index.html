@@ -16,7 +16,7 @@
     <meta name="description" content="" />
     
     <title>
-      Test - 微笑
+      Git分支 - 微笑
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
@@ -29,7 +29,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-MySql插入中文乱码"><span class="toc-text">1.MySql插入中文乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat端口被占用"><span class="toc-text">2.Tomcat端口被占用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-IDEA配置界面UI主题"><span class="toc-text">3.IDEA配置界面UI主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-IDEA配置Tomcat提示启动错误"><span class="toc-text">4.IDEA配置Tomcat提示启动错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Oracle-no-listener"><span class="toc-text">5.Oracle no listener</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Oracle配置远程连接"><span class="toc-text">6.Oracle配置远程连接</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git分支"><span class="toc-text">Git分支</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分支基本操作"><span class="toc-text">分支基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分支创建"><span class="toc-text">分支创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看所有分支"><span class="toc-text">查看所有分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支切换"><span class="toc-text">分支切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合并分支"><span class="toc-text">合并分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看状态"><span class="toc-text">查看状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看Commit操作历史"><span class="toc-text">查看Commit操作历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回退版本"><span class="toc-text">回退版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看分支对象"><span class="toc-text">查看分支对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目分叉历史"><span class="toc-text">项目分叉历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github"><span class="toc-text">Github</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提交代码"><span class="toc-text">提交代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#克隆代码"><span class="toc-text">克隆代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模拟两个用户"><span class="toc-text">模拟两个用户</span></a></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -151,105 +151,86 @@
         <article class="post-entry">
     <div class="header">
       
-      <div class="title">Test</div>
+      <div class="title">Git分支</div>
       <div class="meta">
         <span class="item">
           <span class="iconfont icon-time-circle"></span>
-          <span>2020/07/26</span>
+          <span>2020/07/29</span>
         </span>
 
         
 
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/入门教程">入门教程</a>
+                
+              
+          </span>
+        </span>
         
         
-        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/教程">教程</a>
+                  
+                
+                  
+                    <a href="/tags/Git">Git</a>
+                  
+                
+            </span>
+          </span>
+         
       </div>
       <div>
       </div>
     </div>
-    <h2 id="1-MySql插入中文乱码"><a href="#1-MySql插入中文乱码" class="headerlink" title="1.MySql插入中文乱码"></a>1.MySql插入中文乱码</h2><ul>
-<li>修改制定字段编码</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `tablename` CHANGE `字段名1` `字段名2` VARCHAR(36) CHARACTER SET utf8 NOT NULL;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table score default character <span class="built_in">set</span> utf8;</span><br><span class="line">alter table article（article代替你自己的表名） change  acontent（前后两个content换成你自己的列名，及其后边的数据类型也同样换成自己的） acontent text character <span class="built_in">set</span> utf8;</span><br></pre></td></tr></table></figure>
+    <html><head></head><body><h1 id="Git分支">Git分支<a class="post-anchor" href="#Git分支"></a></h1><h2 id="分支基本操作">分支基本操作<a class="post-anchor" href="#分支基本操作"></a></h2><h3 id="分支创建">分支创建<a class="post-anchor" href="#分支创建"></a></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch fenzhi</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="查看所有分支">查看所有分支<a class="post-anchor" href="#查看所有分支"></a></h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="分支切换">分支切换<a class="post-anchor" href="#分支切换"></a></h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout fenzhi</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="合并分支">合并分支<a class="post-anchor" href="#合并分支"></a></h3><p><strong>当前分支</strong>和指定分支(fenzhi)合并</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge fenzhi</span><br></pre></td></tr></tbody></table></figure>
+
+<p><a href="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709105614841.png" data-caption="image-20200709105614841" data-fancybox="images"><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709105614841.png" alt="image-20200709105614841"></a></p>
+<h3 id="查看状态">查看状态<a class="post-anchor" href="#查看状态"></a></h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="查看Commit操作历史">查看Commit操作历史<a class="post-anchor" href="#查看Commit操作历史"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --online</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="回退版本">回退版本<a class="post-anchor" href="#回退版本"></a></h2><a href="C:\Users\Liu\AppData\Roaming\Typora\typora-user-images\image-20200709104838792.png" data-caption="image-20200709104838792" data-fancybox="images"><img src="C:\Users\Liu\AppData\Roaming\Typora\typora-user-images\image-20200709104838792.png" alt="image-20200709104838792"></a>
+
+<h2 id="查看分支对象">查看分支对象<a class="post-anchor" href="#查看分支对象"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline --decorate</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="项目分叉历史">项目分叉历史<a class="post-anchor" href="#项目分叉历史"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git log --oneline --decorate --graph --all</span><br><span class="line">* c2b9e (HEAD, master) made other changes</span><br><span class="line">| * 87ab2 (testing) made a change</span><br><span class="line">|/</span><br><span class="line">* f30ab add feature #32 - ability to add new formats to the</span><br><span class="line">* 34ac2 fixed bug #1328 - stack overflow under certain conditions</span><br><span class="line">* 98ca9 initial commit of my project</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Github">Github<a class="post-anchor" href="#Github"></a></h2><h3 id="提交代码">提交代码<a class="post-anchor" href="#提交代码"></a></h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push 地址 master</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="克隆代码">克隆代码<a class="post-anchor" href="#克隆代码"></a></h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull 地址 master</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>整张表编码</li>
+<li>会把远程分支数据得到：（<em>注意本地要初始化一个仓库</em>）</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table `tablename` convert to character <span class="built_in">set</span> utf8;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>设置url</li>
+<li><code>git clone 地址</code></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String url=<span class="string">"jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf-8</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>会得到远程仓库形同的数据多次执行会覆盖本地</li>
+</ul>
+<h2 id="模拟两个用户">模拟两个用户<a class="post-anchor" href="#模拟两个用户"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">修改</span><br><span class="line">git add</span><br><span class="line">git commit</span><br><span class="line">git push</span><br></pre></td></tr></tbody></table></figure>
 
-
-
-<h2 id="2-Tomcat端口被占用"><a href="#2-Tomcat端口被占用" class="headerlink" title="2.Tomcat端口被占用"></a>2.Tomcat端口被占用</h2><ul>
-<li>查看端口</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano|findstr <span class="string">"8080"</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>关闭端口</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /pid 3284 /f</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-IDEA配置界面UI主题"><a href="#3-IDEA配置界面UI主题" class="headerlink" title="3.IDEA配置界面UI主题"></a>3.IDEA配置界面UI主题</h2><p>使用Material UI设置主题样式。</p>
-<ul>
-<li><strong>plugins连接不上</strong></li>
-</ul>
-<p>File—&gt;Setting—&gt;Appearance&amp;Behavior—&gt;System Settings—&gt;HTTP Proxy进行配置，地址推荐用：<a href="https://plugins.jetbrains.com**，如果不行也可以配置" target="_blank" rel="noopener">https://plugins.jetbrains.com**，如果不行也可以配置</a> <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a></p>
-<h2 id="4-IDEA配置Tomcat提示启动错误"><a href="#4-IDEA配置Tomcat提示启动错误" class="headerlink" title="4.IDEA配置Tomcat提示启动错误"></a>4.IDEA配置Tomcat提示启动错误</h2><ul>
-<li>报错Error running ‘Tomcat8.5’: port out of range:-1 (moments ago)</li>
-</ul>
-<p>修改默认配置，tomcat的server.xml检查一下，端口不能是-1, 一般会选80，或者1-65535之间的任意一个整数</p>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232105612.png" alt="image-20200724232105612"></p>
-<h2 id="5-Oracle-no-listener"><a href="#5-Oracle-no-listener" class="headerlink" title="5.Oracle no listener"></a>5.Oracle no listener</h2><p>没有监听程序，首先检查服务有没有打开，然后看listener.ora，和tnsnames.ora的host是不是ip地址。然后通过</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status、lsnrctl stop、lsnrctl start</span><br></pre></td></tr></table></figure>
-
-<p>`来查看监听状态还有关闭打开监听。</p>
-<h2 id="6-Oracle配置远程连接"><a href="#6-Oracle配置远程连接" class="headerlink" title="6.Oracle配置远程连接"></a>6.Oracle配置远程连接</h2><ul>
-<li>共享文件夹</li>
-<li>修改ip地址，查看能不能ping通</li>
-<li>服务器安装Oracle，设置listener.ora，tnsnames.ora中的host，需要注意service-name。</li>
-</ul>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232658241.png" alt="image-20200724232658241"></p>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232703641.png" alt="image-20200724232703641"></p>
-<ul>
-<li>服务器配置环境变量</li>
-</ul>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232730466.png" alt="image-20200724232730466"></p>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232733989.png" alt="image-20200724232733989"></p>
-<ul>
-<li>客户机<ul>
-<li>首先解压安装OracleInstanceClient到任意目录，并新建文件夹</li>
-</ul>
-</li>
-</ul>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232933342.png" alt="image-20200724232933342"></p>
-<ul>
-<li><ul>
-<li>ETWORK中新建ADMIN,ADMIN放入服务器中文件。</li>
-</ul>
-</li>
-</ul>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233036379.png" alt="image-20200724233036379"></p>
-<ul>
-<li><ul>
-<li>客户机中安装sqldeveloper,配置一下信息。</li>
-</ul>
-</li>
-</ul>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233234146.png" alt="image-20200724233234146"></p>
-<ul>
-<li><ul>
-<li>Navicat中指定oci.dll文件。</li>
-</ul>
-</li>
-</ul>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233310199.png" alt="image-20200724233310199"></p>
-<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233314199.png" alt="image-20200724233314199"></p>
-
+<p>  <em>冲突后会提示，手动修改重新提交</em></p>
+<p>先add 再commit然后pull的时候会自动合并，手动修改。</p>
+</body></html>
 
   
     <div class="post-reward">
@@ -275,12 +256,10 @@
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2020/07/26/Test%20-%20%E5%89%AF%E6%9C%AC/">Test</a>
-        
     </div>
     <div class="item right">
         
-          <a href="/2020/07/26/Test%20-%20%E5%89%AF%E6%9C%AC%20(2)/">Test</a>
+          <a href="/2020/07/26/Test/">Test</a>
         
     </div>
   </div>
@@ -292,7 +271,7 @@
       本文作者：<a href="http://yoursite.com">Wei-Xiao</a>
     </div>
     <div class="link">
-      永久链接：<a href="http://yoursite.com/2020/07/26/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%20-%20%E5%89%AF%E6%9C%AC/">http://yoursite.com/2020/07/26/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%20-%20%E5%89%AF%E6%9C%AC/</a>
+      永久链接：<a href="http://yoursite.com/2020/07/29/Git%E5%88%86%E6%94%AF/">http://yoursite.com/2020/07/29/Git%E5%88%86%E6%94%AF/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="http://yoursite.com">Wei-Xiao</a>的博客，转载请注明出处！
