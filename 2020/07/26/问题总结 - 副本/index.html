@@ -27,6 +27,11 @@
   <body>
     <canvas id='pagemap'></canvas>
     
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-MySql插入中文乱码"><span class="toc-text">1.MySql插入中文乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat端口被占用"><span class="toc-text">2.Tomcat端口被占用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-IDEA配置界面UI主题"><span class="toc-text">3.IDEA配置界面UI主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-IDEA配置Tomcat提示启动错误"><span class="toc-text">4.IDEA配置Tomcat提示启动错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Oracle-no-listener"><span class="toc-text">5.Oracle no listener</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Oracle配置远程连接"><span class="toc-text">6.Oracle配置远程连接</span></a></li></ol>
+    </div>
+    
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
       <span class="icon-toc menu-reset">Toc</span>
@@ -162,7 +167,89 @@
       <div>
       </div>
     </div>
-    
+    <h2 id="1-MySql插入中文乱码"><a href="#1-MySql插入中文乱码" class="headerlink" title="1.MySql插入中文乱码"></a>1.MySql插入中文乱码</h2><ul>
+<li>修改制定字段编码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `tablename` CHANGE `字段名1` `字段名2` VARCHAR(36) CHARACTER SET utf8 NOT NULL;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table score default character <span class="built_in">set</span> utf8;</span><br><span class="line">alter table article（article代替你自己的表名） change  acontent（前后两个content换成你自己的列名，及其后边的数据类型也同样换成自己的） acontent text character <span class="built_in">set</span> utf8;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>整张表编码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table `tablename` convert to character <span class="built_in">set</span> utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置url</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String url=<span class="string">"jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf-8</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-Tomcat端口被占用"><a href="#2-Tomcat端口被占用" class="headerlink" title="2.Tomcat端口被占用"></a>2.Tomcat端口被占用</h2><ul>
+<li>查看端口</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano|findstr <span class="string">"8080"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>关闭端口</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /pid 3284 /f</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-IDEA配置界面UI主题"><a href="#3-IDEA配置界面UI主题" class="headerlink" title="3.IDEA配置界面UI主题"></a>3.IDEA配置界面UI主题</h2><p>使用Material UI设置主题样式。</p>
+<ul>
+<li><strong>plugins连接不上</strong></li>
+</ul>
+<p>File—&gt;Setting—&gt;Appearance&amp;Behavior—&gt;System Settings—&gt;HTTP Proxy进行配置，地址推荐用：<a href="https://plugins.jetbrains.com**，如果不行也可以配置" target="_blank" rel="noopener">https://plugins.jetbrains.com**，如果不行也可以配置</a> <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a></p>
+<h2 id="4-IDEA配置Tomcat提示启动错误"><a href="#4-IDEA配置Tomcat提示启动错误" class="headerlink" title="4.IDEA配置Tomcat提示启动错误"></a>4.IDEA配置Tomcat提示启动错误</h2><ul>
+<li>报错Error running ‘Tomcat8.5’: port out of range:-1 (moments ago)</li>
+</ul>
+<p>修改默认配置，tomcat的server.xml检查一下，端口不能是-1, 一般会选80，或者1-65535之间的任意一个整数</p>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232105612.png" alt="image-20200724232105612"></p>
+<h2 id="5-Oracle-no-listener"><a href="#5-Oracle-no-listener" class="headerlink" title="5.Oracle no listener"></a>5.Oracle no listener</h2><p>没有监听程序，首先检查服务有没有打开，然后看listener.ora，和tnsnames.ora的host是不是ip地址。然后通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status、lsnrctl stop、lsnrctl start</span><br></pre></td></tr></table></figure>
+
+<p>`来查看监听状态还有关闭打开监听。</p>
+<h2 id="6-Oracle配置远程连接"><a href="#6-Oracle配置远程连接" class="headerlink" title="6.Oracle配置远程连接"></a>6.Oracle配置远程连接</h2><ul>
+<li>共享文件夹</li>
+<li>修改ip地址，查看能不能ping通</li>
+<li>服务器安装Oracle，设置listener.ora，tnsnames.ora中的host，需要注意service-name。</li>
+</ul>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232658241.png" alt="image-20200724232658241"></p>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232703641.png" alt="image-20200724232703641"></p>
+<ul>
+<li>服务器配置环境变量</li>
+</ul>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232730466.png" alt="image-20200724232730466"></p>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232733989.png" alt="image-20200724232733989"></p>
+<ul>
+<li>客户机<ul>
+<li>首先解压安装OracleInstanceClient到任意目录，并新建文件夹</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724232933342.png" alt="image-20200724232933342"></p>
+<ul>
+<li><ul>
+<li>ETWORK中新建ADMIN,ADMIN放入服务器中文件。</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233036379.png" alt="image-20200724233036379"></p>
+<ul>
+<li><ul>
+<li>客户机中安装sqldeveloper,配置一下信息。</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233234146.png" alt="image-20200724233234146"></p>
+<ul>
+<li><ul>
+<li>Navicat中指定oci.dll文件。</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233310199.png" alt="image-20200724233310199"></p>
+<p><img src="C:%5CUsers%5CLiu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200724233314199.png" alt="image-20200724233314199"></p>
+
 
   
     <div class="post-reward">
@@ -188,10 +275,12 @@
   <div class="post-guide">
     <div class="item left">
         
+          <a href="/2020/07/26/Test%20-%20%E5%89%AF%E6%9C%AC/">Test</a>
+        
     </div>
     <div class="item right">
         
-          <a href="/2020/07/26/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">Test</a>
+          <a href="/2020/07/26/Test%20-%20%E5%89%AF%E6%9C%AC%20(2)/">Test</a>
         
     </div>
   </div>
@@ -203,7 +292,7 @@
       本文作者：<a href="http://yoursite.com">Wei-Xiao</a>
     </div>
     <div class="link">
-      永久链接：<a href="http://yoursite.com/2020/07/26/Test/">http://yoursite.com/2020/07/26/Test/</a>
+      永久链接：<a href="http://yoursite.com/2020/07/26/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%20-%20%E5%89%AF%E6%9C%AC/">http://yoursite.com/2020/07/26/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%20-%20%E5%89%AF%E6%9C%AC/</a>
     </div>
     <div class="declare">
       版权声明：本文首发于<a href="http://yoursite.com">Wei-Xiao</a>的博客，转载请注明出处！
