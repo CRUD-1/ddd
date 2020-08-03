@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      JMeter基础操作 - 微笑
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-取样器"><span class="toc-text">5.取样器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-jmeter运行原理"><span class="toc-text">6.jmeter运行原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-jmeter测试计划要素"><span class="toc-text">7.jmeter测试计划要素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-jmeter录制脚本"><span class="toc-text">8.jmeter录制脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-接口测试知识"><span class="toc-text">9.接口测试知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-jmeter取样器—HTTP请求"><span class="toc-text">10.jmeter取样器—HTTP请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1HTTP管理器"><span class="toc-text">10.1HTTP管理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2HTTP请求配置"><span class="toc-text">10.2HTTP请求配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3HTTP请求默认值"><span class="toc-text">10.3HTTP请求默认值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11jmeter参数化"><span class="toc-text">11jmeter参数化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1jmeter英语红变量方法"><span class="toc-text">11.1jmeter英语红变量方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2CSV数据空间实现参数化"><span class="toc-text">11.2CSV数据空间实现参数化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3用户参数"><span class="toc-text">11.3用户参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-4用户定义的变量"><span class="toc-text">11.4用户定义的变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结参数化"><span class="toc-text">总结参数化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断言"><span class="toc-text">断言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应断言"><span class="toc-text">响应断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON断言"><span class="toc-text">JSON断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大小断言"><span class="toc-text">大小断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持续时间断言"><span class="toc-text">持续时间断言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合点–并发"><span class="toc-text">集合点–并发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用步骤"><span class="toc-text">使用步骤</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/logo.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <div class="author">Wei-Xiao</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wei-Xiao</div>
+          <a href="/" class="logo" style="background-image: url('/images/logo.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/CRUD-1" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">JMeter基础操作</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/08/03</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/软件测试">软件测试</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/教程">教程</a>
+                  
+                
+                  
+                    <a href="/tags/JMeter">JMeter</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h2 id="5-取样器">5.取样器<a class="post-anchor" href="#5-取样器"></a></h2><ul>
+<li><strong>作用：想服务器发送请求，并且记录相应时间和响应内容</strong></li>
+</ul>
+<h2 id="6-jmeter运行原理">6.jmeter运行原理<a class="post-anchor" href="#6-jmeter运行原理"></a></h2><ul>
+<li>按照线程方式运行</li>
+<li>GUI模式消耗资源大，无法实现大的并发和压力测试</li>
+<li>使用命令行模式实现高并发和压力测试</li>
+<li>使用GUI模式主要目的是编写和调试jmeter脚本</li>
+</ul>
+<h2 id="7-jmeter测试计划要素">7.jmeter测试计划要素<a class="post-anchor" href="#7-jmeter测试计划要素"></a></h2><p>使用jmeter编写测试脚本要素</p>
+<ul>
+<li>测试计划(项目)</li>
+<li>测试计划中至少一个线程组(业务流程)</li>
+<li>线程组中至少一个取样器 (百度一下等)</li>
+<li>测试计划中必须有监听器(查看测试结果)</li>
+</ul>
+<h2 id="8-jmeter录制脚本">8.jmeter录制脚本<a class="post-anchor" href="#8-jmeter录制脚本"></a></h2><ul>
+<li>使用badboy录制<ul>
+<li>安装badboy</li>
+<li>输入测试网址</li>
+<li>直接操作</li>
+<li>停止录制</li>
+<li>导出脚本</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-接口测试知识">9.接口测试知识<a class="post-anchor" href="#9-接口测试知识"></a></h2><ul>
+<li>接口三要素<ul>
+<li>请求地址/方式</li>
+<li>请求参数</li>
+<li>返回值</li>
+</ul>
+</li>
+<li>HTTP协议<ul>
+<li>请求方式<ul>
+<li>get<ul>
+<li>带参数 params</li>
+<li>不带参数</li>
+</ul>
+</li>
+<li>post<ul>
+<li>x-www-form-urlencoded 参数类型 键值对<ul>
+<li>content-type:application/x-www-form-urlencoded</li>
+</ul>
+</li>
+<li>json格式数据<ul>
+<li>content-type：application/json</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>put</li>
+<li>delete</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-jmeter取样器—HTTP请求">10.jmeter取样器—HTTP请求<a class="post-anchor" href="#10-jmeter取样器—HTTP请求"></a></h2><h3 id="10-1HTTP管理器">10.1HTTP管理器<a class="post-anchor" href="#10-1HTTP管理器"></a></h3><p>HTTP信息头管理器</p>
+<ul>
+<li>位置 配置原件<ul>
+<li>HTTP信息头管理器        HTTP请求头</li>
+<li>主要使用Content-Type参数<ul>
+<li>Content-Type指的是请求参数的数据类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在jmeter中，发送HTTP的post请求需要添加HTTP信息头管理器</li>
+</ul>
+<h3 id="10-2HTTP请求配置">10.2HTTP请求配置<a class="post-anchor" href="#10-2HTTP请求配置"></a></h3><p>http协议    默认端口号80</p>
+<p>https协议    默认端口号443</p>
+<ul>
+<li>协议    http</li>
+<li>服务器名称或ip    接口的域名    127.0.0.1</li>
+<li>端口号：如果有填写具体端口号如8000</li>
+<li>方法：http协议请求方式</li>
+<li>路径：接口地址</li>
+<li>内容编码：utf-8</li>
+<li>参数：针对post请求x-www-form-urlencoded格式和form-data格式</li>
+<li>消息体数据：针对post请求中json格式或者xml格式请求数据</li>
+<li>文件上传：上传文件接口</li>
+</ul>
+<h3 id="10-3HTTP请求默认值">10.3HTTP请求默认值<a class="post-anchor" href="#10-3HTTP请求默认值"></a></h3><ul>
+<li>位置<ul>
+<li>线程组–添加–配置与按键–http请求默认值</li>
+</ul>
+</li>
+<li>作用：<ul>
+<li>将同一线程组下所有http请求协议和服务器域名同一管理</li>
+<li>如果http请求中自己填写的协议和服务器域名，放发送请求时，使用本身的</li>
+</ul>
+</li>
+</ul>
+<h2 id="11jmeter参数化">11jmeter参数化<a class="post-anchor" href="#11jmeter参数化"></a></h2><h3 id="11-1jmeter英语红变量方法">11.1jmeter英语红变量方法<a class="post-anchor" href="#11-1jmeter英语红变量方法"></a></h3><p>${变量名}</p>
+<h3 id="11-2CSV数据空间实现参数化">11.2CSV数据空间实现参数化<a class="post-anchor" href="#11-2CSV数据空间实现参数化"></a></h3><ul>
+<li>建立CSV文件<ul>
+<li>excel建立文件另存为CSV格式，转码为utf-8</li>
+</ul>
+</li>
+<li>配置jmeter中csv数据文件位置<ul>
+<li>文件名</li>
+<li>文件编码</li>
+<li>变量名，有多个英文逗号隔开</li>
+<li>首行忽略</li>
+<li>分隔符默认</li>
+</ul>
+</li>
+<li>HTTP请求中引用参数<ul>
+<li>${参数名}</li>
+</ul>
+</li>
+<li>使用csv中所有数据，设置线程数或者循环次数</li>
+</ul>
+<h3 id="11-3用户参数">11.3用户参数<a class="post-anchor" href="#11-3用户参数"></a></h3><ul>
+<li>位置<ul>
+<li>前置处理器—>用户参数</li>
+</ul>
+</li>
+<li>使用方式<ul>
+<li>针对哪个http请求就在哪里添加</li>
+</ul>
+</li>
+<li>配置用户参数<ul>
+<li>添加变量<ul>
+<li>添加变量名称</li>
+</ul>
+</li>
+<li>添加用户<ul>
+<li>添加测试数据</li>
+<li>一个用户就是一个测试数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用用户参数<ul>
+<li>HTTP中引用变量</li>
+<li>线程组中设置线程数的值和用户参数中的用户数一致</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-4用户定义的变量">11.4用户定义的变量<a class="post-anchor" href="#11-4用户定义的变量"></a></h3><ul>
+<li>位置<ul>
+<li>测试计划页</li>
+<li>配置元件中–>用户定义的变量</li>
+</ul>
+</li>
+<li>使用<ul>
+<li>添加变量</li>
+</ul>
+</li>
+<li>使用<ul>
+<li>凡是可以输入的位置都可以使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结参数化">总结参数化<a class="post-anchor" href="#总结参数化"></a></h3><ul>
+<li>CSV数据文件位置    –>配置元件中<ul>
+<li>适用于大量测试数据的时候使用</li>
+</ul>
+</li>
+<li>用户参数  –>前置处理器中<ul>
+<li>适用于少量测试数据</li>
+</ul>
+</li>
+<li>用户定义的变量 –>测试计划<ul>
+<li>适用于常量配置：数据库地址，测试环境地址，登录数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="断言">断言<a class="post-anchor" href="#断言"></a></h2><h3 id="定义">定义<a class="post-anchor" href="#定义"></a></h3><p>程序代替人工去判断相应数据是否达到预期</p>
+<h3 id="响应断言">响应断言<a class="post-anchor" href="#响应断言"></a></h3><ul>
+<li>断言状态码<ul>
+<li>添加断言：哪一个接口需要，就在该接口下添加断言</li>
+<li>配置断言<ul>
+<li>在测试字段中选择相应代码</li>
+<li>在测试模式汇总填写期望代码，如200</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="JSON断言">JSON断言<a class="post-anchor" href="#JSON断言"></a></h3><ul>
+<li>作用范围：返回值格式为json格式</li>
+<li>添加json断言<ul>
+<li>哪个接口需要就在哪里添加</li>
+</ul>
+</li>
+<li>配置json断言<ul>
+<li>Assert JSON Path exists:获取返回结果的字段–>实际结果</li>
+<li>Expected Value:预期结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="大小断言">大小断言<a class="post-anchor" href="#大小断言"></a></h3><ul>
+<li>断言返回值所占字节数</li>
+<li>如果填写20比较类型>表示返回值字节数>20</li>
+</ul>
+<h3 id="持续时间断言">持续时间断言<a class="post-anchor" href="#持续时间断言"></a></h3><ul>
+<li>断言接口响应时间是否≤所期望的时间</li>
+</ul>
+<p><strong>注意：接口的响应时间都是毫秒级</strong></p>
+<h2 id="集合点–并发">集合点–并发<a class="post-anchor" href="#集合点–并发"></a></h2><ul>
+<li>Sychronizing Timer –>集合点<ul>
+<li>位置：定时器–>Sychronizing Timer</li>
+<li>那个接口需要做并发就在那个接口下添加集合点</li>
+</ul>
+</li>
+<li>配置集合点<ul>
+<li>每次结合的用户数</li>
+<li>集合用户数所用时间（单位：毫秒）<ul>
+<li>0：表示无线等待，直到线程数量==集合数量</li>
+<li>设置时长：表示规定时间内启动线程，不管有没有集合到预期的数量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>集合数最好能被线程数整除</li>
+<li>集合时间大于等于线程组中的启动时间</li>
+</ul>
+</li>
+</ul>
+<h2 id="函数">函数<a class="post-anchor" href="#函数"></a></h2><h3 id="使用步骤">使用步骤<a class="post-anchor" href="#使用步骤"></a></h3><ul>
+<li>点击函数助手</li>
+<li>选择函数</li>
+<li>设置参数</li>
+<li>生成</li>
+<li>复制函数字符串</li>
+<li>粘贴到需要的位置</li>
+</ul>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/07/29/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">问题总结</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://github.com/CRUD-1/CRUD-1.github.io.git">Wei-Xiao</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://github.com/CRUD-1/CRUD-1.github.io.git/2020/08/03/Jmeter/">https://github.com/CRUD-1/CRUD-1.github.io.git/2020/08/03/Jmeter/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://github.com/CRUD-1/CRUD-1.github.io.git">Wei-Xiao</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://github.com/CRUD-1/CRUD-1.github.io.git">Wei-Xiao</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
